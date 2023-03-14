@@ -1,6 +1,6 @@
-import BuyTitle from '@/components /Buy/BuyTitle'
-import Pool from '@/components /Pool/Pool'
-import Trade from '@/components /Buy/Trade'
+import BuyTitle from '@/components/Buy/BuyTitle'
+import Pool from '@/components/Pool/Pool'
+import Trade from '@/components/Buy/Trade'
 import React from 'react'
 
 const index = () => {
