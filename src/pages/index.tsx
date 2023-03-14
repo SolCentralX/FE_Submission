@@ -1,6 +1,6 @@
 import Head from 'next/head'
-import Trade from '@/components /Buy/Trade'
-import TradeMain from '@/components /Trade/TradeMain'
+import Trade from '@/components/Buy/Trade'
+import TradeMain from '@/components/Trade/TradeMain'
 import { useEffect, useMemo, useState } from 'react'
 import { useFetchData } from './hook'
 import { useFetchProvider } from '@/hooks'

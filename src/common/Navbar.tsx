@@ -1,5 +1,5 @@
-import Right from '@/components /Navbar/Right'
-import { Tabs } from '@/components /Navbar/Tabs'
+import Right from '@/components/Navbar/Right'
+import { Tabs } from '@/components/Navbar/Tabs'
 import React from 'react'
 
 
