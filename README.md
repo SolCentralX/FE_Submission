@@ -1,38 +1,152 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# Solana Perpetuals
 
-## Getting Started
+While FTX and Alameda supported TVL, transactions, and token values throughout Solana, they were only a piece of the broader puzzle. Despite regular network outages, it's advantages of speed, low fees, composability, and developer friendliness cannot be denied.
+The strong Singapore builder community led by Metacamp is a testament to that fact.
+When the Grizzlython came rolling around, we saw a chance to make a dent in the Solana ecosystem. A team was put together to build a GMX-type AMM Perpetual Exchange. With one core aim to rebuild institutional investor trust. We want to make Solana great again.
 
-First, run the development server:
+## Introduction
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
+SolDecentral is an experimental implementation of GMX, a renowned platform for perpetual trading that has gained immense popularity on Arbitrum and Avalanche and triggered a phenomenon known as the GLP wars. The tokenomics model of GMX has been a key factor in its success, with significant fees generated for GMX stakers and a surge in demand for GLP. The goal is to replicate this model on Solana and make it work seamlessly on the network.
+
+## Quick start
+
+### Setup Environment
+
+1. Clone the repository from <https://github.com/askibin/perpetuals.git>.
+2. Install the latest Solana tools from <https://docs.solana.com/cli/install-solana-cli-tools>. If you already have Solana tools, run `solana-install update` to get the latest compatible version.
+3. Install the latest Rust stable from <https://rustup.rs/>. If you already have Rust, run `rustup update` to get the latest version.
+4. Install the latest Anchor framework from <https://www.anchor-lang.com/docs/installation>. If you already have Anchor, run `avm update` to get the latest version.
+
+### Build
+
+First, generate a new key for the program address with `solana-keygen new -o my_new_keypair.json`. This keypair is your wallet and ensure the path of your wallet in anchor.toml matches this. Then replace the existing program ID with the newly generated address in `Anchor.toml` and `programs/perpetuals/src/lib.rs`.
+Save this seed phrase and your BIP39 passphrase as you will need this later when deploying your program in Sol Playground. More on this later.
+
+Important: The wallet's pubkey will be set as an upgrade authority upon initial deployment of the program. It is strongly recommended to make upgrade authority a multisig when deploying to the mainnet.
+
+To build the program run `anchor build` command from the `perpetuals` directory:
+
+```sh
+cd perpetuals
+anchor build
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Before you can deploy, you will need 24 test SOL.
+If you don't have it, then you can follow these steps to get it.
 
-You can start editing the page by modifying `pages/index.tsx`. The page auto-updates as you edit the file.
+```
+solana airdrop 2 <pubkey>
+solana balance <pubkey>
+repeat (1) until your balance returns 26 SOL
+```
 
-[API routes](https://nextjs.org/docs/api-routes/introduction) can be accessed on [http://localhost:3000/api/hello](http://localhost:3000/api/hello). This endpoint can be edited in `pages/api/hello.ts`.
+Note: pubkey is also the account used to deploy the program.
 
-The `pages/api` directory is mapped to `/api/*`. Files in this directory are treated as [API routes](https://nextjs.org/docs/api-routes/introduction) instead of React pages.
+### Deploy
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+To deploy the program to the devnet, we will use solana-playground <https://beta.solpg.io/>. This was our workaround to the dependency issues we faced.
 
-## Learn More
+```
 
-To learn more about Next.js, take a look at the following resources:
+1. Open browser to https://beta.solpg.io/
+2. In the left panel > click on hammer and wrench icon
+3. In program credentials > import public key you created in the build phase eg. my_new_keypair.json
+4. Upload your program > target > deploy > perpetuals.so
+5. IDL > target > idl > perpetuals.json
+6. Click Deploy
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+```
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+Once deployed successfully verify with:
 
-## Deploy on Vercel
+```
+solana program show <PROGRAM_ID>
+```
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+Output should look something like this:
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+Program Id: 2nv5ppjUhvze6m6RAZweUBVzt3KSbszsBuW1Yjh4kr8A
+Owner: BPFLoaderUpgradeab1e11111111111111111111111
+ProgramData Address: DEs1TUwv3bgRL6drB7n9ggsc1GZbMMpBTaFBR2vBrLrx
+Authority: ApxxRUyjGDPNp4VWV9CRfKa1WE37PoJLjjREupUD5Bvt
+Last Deployed In Slot: 200043118
+Data Length: 2351568 (0x23e1d0) bytes
+Balance: 16.36811736 SOL
+
+### Initialize Program and Pool
+
+Create an admin wallet following the same procedure in the build step above. Note the seed phrase and passphrase if you used one.
+
+To initialize deployed program, run the following commands:
+
+```
+cd app
+npm install
+npm install -g npx
+npx ts-node app/src/cli.ts -k <ADMIN_WALLET> init -m 1 <pubkey of admin wallet>
+```
+
+Where `<ADMIN_WALLET>` is the file path to the wallet that was set as the upgrade authority of the program upon deployment. `-m` for min-signatures will be required to execute privileged instructions. To provide multiple signatures, just execute exactly the same command multiple times specifying different `<ADMIN_WALLET>` with `-k` option. The intermediate state is recorded on-chain so that commands can be executed on different computers.
+
+To validate initialized program:
+
+```
+
+npx ts-node app/src/cli.ts -k <ADMIN WALLET> get-multisig
+npx ts-node app/src/cli.ts -k <ADMIN WALLET> get-perpetuals
+
+```
+
+Before the program can accept any liquidity or open a trade, you need to create a token pool and add one or more token custodies to it:
+
+```
+npx ts-node app/src/cli.ts -k <ADMIN_WALLET> add-pool <POOL_NAME>
+npx ts-node app/src/cli.ts -k <ADMIN_WALLET> add-custody <POOL_NAME>
+<POOL_NAME> <TOKEN_MINT> <TOKEN_ORACLE> <IS_STABLE>
+```
+
+Where `<POOL_NAME>` is a random name you want to assign to the pool, `<TOKEN_MINT>` is the mint address of the token, and `<TOKEN_ORACLE>` is the corresponding Pyth price account that can be found on [this page](https://pyth.network/price-feeds?cluster=devnet). `<IS_STABLE>` specifies whether the custody is for a stablecoin. For example:
+
+```
+npx ts-node app/src/cli.ts -k ~/my-solana-wallets/admin-wallet-keypair-1.json add-pool SLP-Pool
+npx ts-node app/src/cli.ts -k ~/my-solana-wallets/admin-wallet-keypair-1.json add-custody SLP-Pool So11111111111111111111111111111111111111112 J83w4HKfqxwcq3BEMMkPFSppX3gqekLyLJBexebFVkix false
+```
+
+To validate added pools and custodies, run:
+
+```
+
+npx ts-node app/src/cli.ts -k ~/my-solana-wallets/admin-wallet-keypair-1.json get-pool SLP-Pool
+npx ts-node app/src/cli.ts -k ~/my-solana-wallets/admin-wallet-keypair-1.json get-custody SLP-Pool So11111111111111111111111111111111111111112
+
+```
+
+CLI offers other useful commands. You can get the list of all of them by running the following:
+
+```
+
+npx ts-node src/cli.ts --help
+
+```
+
+### Further Steps
+
+To allow users to interact with the program, you need a UI. An open-source reference implementation is under development and will be available soon. In the meantime, you can use the test client available under the `test` directory and the CLI client under the `app/src` directory for examples of how user instructions can be built and executed. Feel free to implement your own version of the UI.
+
+## Support
+
+If you are experiencing technical difficulties while working with the Perpetuals codebase, ask your question on [StackExchange](https://solana.stackexchange.com) (tag your question with `perpetuals`).
+
+If you found a bug in the code, you can raise an issue on [Github](https://github.com/askibin/perpetuals). But if this is a security issue, please don't disclose it on Github or in public channels. Send information to solana.farms@protonmail.com instead.
+
+## Contributing
+
+Contributions are very welcome. Please refer to the [Contributing](https://github.com/solana-labs/solana/blob/master/CONTRIBUTING.md) guidelines for more information.
+
+## License
+
+Solana Perpetuals codebase is released under [Apache License 2.0](LICENSE).
+
+## Disclaimer
+
+By accessing or using Solana Perpetuals or any of its components, you accept and agree with the [Disclaimer](DISCLAIMER.md).
