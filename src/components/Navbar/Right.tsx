@@ -11,7 +11,7 @@ const Right = () => {
   return (
     <div className='flex flex-row text-white border-neutral-600 border-2 rounded-lg items-center pl-2' onClick={()=> disconnectWallet()}>
         <AccountBalanceWalletIcon/>
-        <WalletMultiButton className='bg-white'/>
+        <WalletMultiButton className='bg-transparent'/>
     </div>
   )
 }

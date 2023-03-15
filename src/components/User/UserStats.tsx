@@ -41,7 +41,6 @@ function a11yProps(index: number) {
 }
 
 const UserStats = () => {
-
   const [value, setValue] = React.useState(0);
   const handleChange = (event: React.SyntheticEvent, newValue: number) => {
     setValue(newValue);
@@ -52,9 +51,9 @@ const UserStats = () => {
     <Box sx={{ width: '100%'}} >
       <Box sx={{ borderBottom: 1, borderColor: 'divider' }}>
         <Tabs value={value} onChange={handleChange} aria-label="basic tabs example">
-          <Tab label="Positions" className='text-white'{...a11yProps(0)} />
-          <Tab label="Orders" className='text-white'{...a11yProps(1)} />
-          <Tab label="Trades" className='text-white'{...a11yProps(2)} />
+          <Tab label="Positions" className='text-white' {...a11yProps(0)} style={{color: "#fff"}} />
+          <Tab label="Orders" className='text-white' {...a11yProps(1)} style={{color: "#fff"}} />
+          <Tab label="Trades" className='text-white' {...a11yProps(2)} style={{color: "#fff"}} />
         </Tabs>
       </Box>
       <div className='bg-[#17182c]'>
