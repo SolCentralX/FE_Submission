@@ -14,7 +14,7 @@ SolDecentral is an experimental implementation of GMX, a renowned platform for p
 
 ## Deployed - Devnet (MVP)
 
-Live demo: https://soldecentral2.vercel.app/
+Live demo: https://soldecentral.vercel.app/
 
 #### Connect with the team
 
