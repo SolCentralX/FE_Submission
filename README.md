@@ -8,6 +8,10 @@ When the Grizzlython came rolling around, we saw a chance to make a dent in the 
 
 SolDecentral is an experimental implementation of GMX, a renowned platform for perpetual trading that has gained immense popularity on Arbitrum and Avalanche and triggered a phenomenon known as the GLP wars. The tokenomics model of GMX has been a key factor in its success, with significant fees generated for GMX stakers and a surge in demand for GLP. The goal is to replicate this model on Solana and make it work seamlessly on the network.
 
+## Architecture
+
+![Architecture Diagram](https://github.com/SolCentralX/FE_Submission/blob/92372db51200cc5f50e227cce90fe0c901512506/Diagrams/SolDecentral_Architecture_V1.png)
+
 ## Quick start
 
 ### Setup Environment
