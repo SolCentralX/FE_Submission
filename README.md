@@ -1,8 +1,8 @@
-# Solana Perpetuals
+# SolDecentral
 
 While FTX and Alameda supported TVL, transactions, and token values throughout Solana, they were only a piece of the broader puzzle. Despite regular network outages, it's advantages of speed, low fees, composability, and developer friendliness cannot be denied.
 The strong Singapore builder community led by Metacamp is a testament to that fact.
-When the Grizzlython came rolling around, we saw a chance to make a dent in the Solana ecosystem. A team was put together to build a GMX-type AMM Perpetual Exchange. With one core aim to rebuild institutional investor trust. We want to make Solana great again.
+When the Grizzlython came rolling around, we saw a chance to make a dent in the Solana ecosystem. A team was put together to build a decentralized GMX-type AMM Perpetual Exchange. With one core aim to rebuild institutional investor trust. We want to make Solana great again.
 
 ## Introduction
 
@@ -159,8 +159,4 @@ npx ts-node src/cli.ts --help
 
 ## Future Developments
 
-- Start small and target small niche market of borrowers to test product market fit. See deck for more info on GTM.
-- Shifted our focus to fundraising through hackathons, community, grants, and angels.
-- Flash Loan functionality to source liquidity from multiple locations starting with Uniswap and Maker.
-- Integrate AaveV3 and test use of simple and batch flash loan functionality to lower fees.
-- Work closely with Optimism team for auditing and prepare to launch there at the end of 2022.
+- If we secure funding, we will continue to build V2 and building partnerships.
