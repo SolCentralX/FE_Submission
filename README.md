@@ -146,7 +146,7 @@ npx ts-node src/cli.ts --help
 ### More Information
 
 - Created at: [Solana Grizzlython 2023](https://solana.com/grizzlython?mc_cid=f820b942d4&mc_eid=bc6c6929ba)
-- Slides: [Presentation Slides](https://docs.google.com/presentation/d/1VOjhIQMKtsj6bUr-Plr61rqm-tvn5VkTD15X5ZTz_AE/edit?usp=sharing)
+- Slides: [Presentation Slides](https://drive.google.com/file/d/1BaWY_1SD6rD8KL16gu7Po-y9ZeqcSbsF/view?usp=sharing)
 - Figma: [Mockups, wireframes, and logic flow](https://www.figma.com/file/Op99MX4zSwSv0NICAxkCoO/UI-Design-Mocks?node-id=0%3A1&t=j0pbR7rPkCjcyuA7-0)
 - Notion: [Brainstorming](https://www.notion.so/solcentralx/Product-Requirement-Document-PRD-8b7f0a876a244e2384991c55257b0a54)
 - R&D: [Solana Labs - Perpetuals Slide Deck](https://drive.google.com/file/u/4/d/1uXNaQybmCL4tv2wYyDvl2vgLBCFeaJbj/view?usp=sharing)
