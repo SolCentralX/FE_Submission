@@ -133,24 +133,10 @@ npx ts-node src/cli.ts --help
 
 ```
 
-### Further Steps
+### More Information
 
-To allow users to interact with the program, you need a UI. An open-source reference implementation is under development and will be available soon. In the meantime, you can use the test client available under the `test` directory and the CLI client under the `app/src` directory for examples of how user instructions can be built and executed. Feel free to implement your own version of the UI.
-
-## Support
-
-If you are experiencing technical difficulties while working with the Perpetuals codebase, ask your question on [StackExchange](https://solana.stackexchange.com) (tag your question with `perpetuals`).
-
-If you found a bug in the code, you can raise an issue on [Github](https://github.com/askibin/perpetuals). But if this is a security issue, please don't disclose it on Github or in public channels. Send information to solana.farms@protonmail.com instead.
-
-## Contributing
-
-Contributions are very welcome. Please refer to the [Contributing](https://github.com/solana-labs/solana/blob/master/CONTRIBUTING.md) guidelines for more information.
-
-## License
-
-Solana Perpetuals codebase is released under [Apache License 2.0](LICENSE).
-
-## Disclaimer
-
-By accessing or using Solana Perpetuals or any of its components, you accept and agree with the [Disclaimer](DISCLAIMER.md).
+- Created at: [Solana Grizzlython 2023](https://solana.com/grizzlython?mc_cid=f820b942d4&mc_eid=bc6c6929ba)
+- Slides: [Presentation Slides](https://docs.google.com/presentation/d/1VOjhIQMKtsj6bUr-Plr61rqm-tvn5VkTD15X5ZTz_AE/edit?usp=sharing)
+- Figma: [Mockups, wireframes, and logic flow](https://www.figma.com/file/Op99MX4zSwSv0NICAxkCoO/UI-Design-Mocks?node-id=0%3A1&t=j0pbR7rPkCjcyuA7-0)
+- Notion: [Brainstorming](https://www.notion.so/solcentralx/Product-Requirement-Document-PRD-8b7f0a876a244e2384991c55257b0a54)
+- R&D: [Solana Labs - Perpetuals Slide Deck](https://drive.google.com/file/u/4/d/1uXNaQybmCL4tv2wYyDvl2vgLBCFeaJbj/view?usp=sharing)
