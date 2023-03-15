@@ -159,4 +159,4 @@ npx ts-node src/cli.ts --help
 
 ## Future Developments
 
-- If we secure funding, we will continue to build V2 and building partnerships.
+- If we secure funding, we will continue to build V2 and partnerships.
