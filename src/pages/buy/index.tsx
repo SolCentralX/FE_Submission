@@ -10,6 +10,8 @@ const index = () => {
         <div className='flex flex-row space-x-20 h-1/2 w-full pl-20'>
             <Pool/>
             <Trade/>
+            {/* <TradePay entryPriceandFee={datas.entryPriceandFee} solBalance={datas.solBalance}/>   */}
+
         </div>
     </div>
   )

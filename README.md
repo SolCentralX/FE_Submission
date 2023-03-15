@@ -12,7 +12,17 @@ SolDecentral is an experimental implementation of GMX, a renowned platform for p
 
 ![Architecture Diagram](https://github.com/SolCentralX/FE_Submission/blob/92372db51200cc5f50e227cce90fe0c901512506/Diagrams/SolDecentral_Architecture_V1.png)
 
+## Deployed - Devnet (MVP)
+
+Live demo: https://soldecentral2.vercel.app/
+
+#### Connect with the team
+
+Connect with us on [Twitter](https://twitter.com/soldecentral) if you would like to explore synergies or have any questions.
+
 ## Quick start
+
+Follow the steps below if you want to run it yourself.
 
 ### Setup Environment
 
@@ -140,3 +150,17 @@ npx ts-node src/cli.ts --help
 - Figma: [Mockups, wireframes, and logic flow](https://www.figma.com/file/Op99MX4zSwSv0NICAxkCoO/UI-Design-Mocks?node-id=0%3A1&t=j0pbR7rPkCjcyuA7-0)
 - Notion: [Brainstorming](https://www.notion.so/solcentralx/Product-Requirement-Document-PRD-8b7f0a876a244e2384991c55257b0a54)
 - R&D: [Solana Labs - Perpetuals Slide Deck](https://drive.google.com/file/u/4/d/1uXNaQybmCL4tv2wYyDvl2vgLBCFeaJbj/view?usp=sharing)
+
+## Thought Process
+
+- Originally inspired by Emon and Alexey from Solana Labs.
+- Expressed interest to implement their reference implementation.
+- Major challenges: language barrier, no backend dev, and no Solana experience.
+
+## Future Developments
+
+- Start small and target small niche market of borrowers to test product market fit. See deck for more info on GTM.
+- Shifted our focus to fundraising through hackathons, community, grants, and angels.
+- Flash Loan functionality to source liquidity from multiple locations starting with Uniswap and Maker.
+- Integrate AaveV3 and test use of simple and batch flash loan functionality to lower fees.
+- Work closely with Optimism team for auditing and prepare to launch there at the end of 2022.
