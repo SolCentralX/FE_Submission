@@ -1,4 +1,4 @@
-import Socials from '@/components/Footer/Socials'
+import Socials from '../components/Footer/Socials'
 import Title from '@/components/Footer/Title'
 import React from 'react'
 

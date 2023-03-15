@@ -1,17 +1,14 @@
 import Head from 'next/head'
-import Trade from '@/components/Buy/Trade'
+import Trade from '../components/Buy/Trade'
 import TradeMain from '@/components/Trade/TradeMain'
 import { useEffect, useMemo, useState } from 'react'
-import { useFetchData } from './hook'
+import { useFetchData } from '../hooks/useTrade'
 import { useFetchProvider } from '@/hooks'
-import { useAtom } from 'jotai'
-// import { setItem } from '@/hooks/localStorage';
 
 export default function Home() {
   const {provider} = useFetchProvider()
   // const {openPosiition} = useFetchApprove()
   // const [datas , setData] = useAtom(data)
-  const [flag, setFlag] = useState(false)
   const {fetchData} = useFetchData()
   const [datas, setDatas] = useState({
     solBalance: null,
@@ -20,37 +17,17 @@ export default function Home() {
       fee: null
     }
   })
-  // @ts-ignore
-  // localStorage.setItem('positionData', [])
-  // console.log(datas, 'datas-------->')
-  // const [tradeData, setTradeData] = useState({
-  //   pools: [],
-  //   position: null,
-  //   oraclePrice: null,
-  //   solBalance: null,
-  //   entryPriceandFee: {
-  //     price: null,
-  //     fee: null
-  //   }
-  // })
 
-  // useEffect(() => {
-  //   setTradeData(data)
-  // }, [data])
-  // useFetchData()
   const fetchDatas = async () => {
     const response: any = await fetchData();
     setDatas(response)
-    console.log(response)
   }
 
   useEffect(() => {
-    // console.log(provider, 'provider-------->');
-    if (!provider) {
-      return
-    }
+    // TODO To be optimized
+    if (datas?.entryPriceandFee?.price) {return}
     fetchDatas();
-  },[provider])
+  }, [provider])
 
   return (
     <>
